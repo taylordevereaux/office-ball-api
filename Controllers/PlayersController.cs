@@ -70,5 +70,23 @@ namespace OfficeBall.Api.Controllers
 
             return NoContent();
         }
+
+
+        [HttpPut("{id:length(24)}/setshots")]
+        public IActionResult SetShots([FromRoute] string id, [FromQuery] int shots)
+        {
+            var player = _playerService.Get(id);
+
+            if (player == null)
+            {
+                return NotFound();
+            }
+
+            player.Shots = shots;
+
+            _playerService.Update(id, player);
+
+            return NoContent();
+        }
     }
 }

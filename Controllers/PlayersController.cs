@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using OfficeBall.Api.Database;
 using OfficeBall.Api.Models;
@@ -87,6 +88,18 @@ namespace OfficeBall.Api.Controllers
             _playerService.Update(id, player);
 
             return NoContent();
+        }
+
+        [HttpGet("tags")]
+        public List<string> Tags()
+        {
+            return this._playerService
+                .Get()
+                .Where(x => x.Tags?.Count > 0)
+                .SelectMany(x => x.Tags)
+                .Select(x => x.Name)
+                .Distinct()
+                .ToList();
         }
     }
 }

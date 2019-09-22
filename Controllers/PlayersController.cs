@@ -1,11 +1,13 @@
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using OfficeBall.Api.Database;
 using OfficeBall.Api.Models;
 
 namespace OfficeBall.Api.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class PlayersController : ControllerBase
